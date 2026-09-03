@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ivory text-charcoal font-body antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-heading;
+}
+
+* :focus-visible {
+  outline: 2px solid #C58A32;
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F2E8;
+}
+::-webkit-scrollbar-thumb {
+  background: #C58A32;
+  border-radius: 999px;
+}
+
+.placeholder-frame {
+  @apply relative flex flex-col items-center justify-center border-2 border-gold/60 bg-gradient-to-br from-espresso/5 to-gold/10 text-warmbrown;
+}
+
+.placeholder-frame::before {
+  content: '';
+  @apply absolute inset-2 border border-gold/30 pointer-events-none;
+}
+
+.container-px {
+  @apply px-6 sm:px-8 lg:px-12;
+}
+
+.section-py {
+  @apply py-16 md:py-24;
+}
