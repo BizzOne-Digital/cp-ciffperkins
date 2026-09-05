@@ -6,7 +6,7 @@ import { api } from '../utils/api'
 
 const FALLBACK_ABOUT = {
   body:
-    "Cliff Perkins was raised on gospel harmonies and hometown grit, in a home where storytelling and song were the family's shared language. Over four decades, that upbringing grew into a career spanning six published books, five studio albums, and thousands of live performances across churches, theaters, and festival stages.\n\nCliff's writing draws on real hardship and real hope — memoir, reflection, and fiction that never shy away from the truth. His music carries the same honesty, rooted in gospel and soul, built to move a room from silence to standing ovation.\n\nToday, Cliff continues to write, record, and tour, mentoring the next generation of storytellers and musicians while building a legacy meant to outlast him.",
+    "Cliff Perkins is an R&B tenor singer and choreographer, and the founder, manager, and organizer of Soul Generation. Beyond the stage, Cliff has built and run nearly every part of the group's business — serving as business manager, record company owner, publisher, and booking agent for Soul Generation throughout its career.\n\nFrom the group's debut album, Beyond Body and Soul, to the latest release, Soul Generation Feat. Cliff Perkins, his catalog spans decades of R&B and soul recordings alongside his published books.\n\nToday, Cliff continues to write, record, and perform — carrying that same hands-on ownership of his craft, his catalog, and his career to every audience he meets.",
 }
 
 const PHILOSOPHY =

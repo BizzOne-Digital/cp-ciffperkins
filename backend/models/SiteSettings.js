@@ -7,6 +7,7 @@ const siteSettingsSchema = new mongoose.Schema(
     phone: { type: String, default: '' },
     amazonStoreUrl: { type: String, default: '' },
     cdBabyUrl: { type: String, default: '' },
+    websiteUrl: { type: String, default: '' },
     facebook: { type: String, default: '' },
     instagram: { type: String, default: '' },
     youtube: { type: String, default: '' },

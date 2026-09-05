@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react'
+import { Facebook, Instagram, Youtube, Mail, Phone, Globe } from 'lucide-react'
 import Logo from '../common/Logo'
 import { api } from '../../utils/api'
 
@@ -30,9 +30,9 @@ export default function Footer() {
     }
   }, [])
 
-  const email = settings?.contactEmail || 'booking@cliffperkins.com'
-  const phone = settings?.contactPhone || '(555) 010-2024'
-  const address = settings?.address || 'Nashville, Tennessee'
+  const email = settings?.email || 'soulg192@aol.com'
+  const phone = settings?.phone || '201-920-1021'
+  const website = settings?.websiteUrl || ''
 
   return (
     <footer className="bg-cream border-t border-gold/20">
@@ -70,12 +70,16 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <Phone size={16} className="text-gold shrink-0" aria-hidden="true" />
-              <a href={`tel:${phone}`} className="hover:text-gold">{phone}</a>
+              <a href={`tel:${phone.replace(/[^0-9+]/g, '')}`} className="hover:text-gold">{phone}</a>
             </li>
-            <li className="flex items-center gap-2">
-              <MapPin size={16} className="text-gold shrink-0" aria-hidden="true" />
-              <span>{address}</span>
-            </li>
+            {website && (
+              <li className="flex items-center gap-2">
+                <Globe size={16} className="text-gold shrink-0" aria-hidden="true" />
+                <a href={website} target="_blank" rel="noopener noreferrer" className="hover:text-gold break-all">
+                  {website.replace(/^https?:\/\//, '')}
+                </a>
+              </li>
+            )}
           </ul>
         </div>
 
@@ -84,13 +88,13 @@ export default function Footer() {
             Follow
           </h4>
           <div className="flex gap-4">
-            <a href={settings?.facebookUrl || '#'} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-espresso hover:text-gold">
+            <a href={settings?.facebook || '#'} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-espresso hover:text-gold">
               <Facebook size={20} />
             </a>
-            <a href={settings?.instagramUrl || '#'} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-espresso hover:text-gold">
+            <a href={settings?.instagram || '#'} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-espresso hover:text-gold">
               <Instagram size={20} />
             </a>
-            <a href={settings?.youtubeUrl || '#'} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-espresso hover:text-gold">
+            <a href={settings?.youtube || '#'} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-espresso hover:text-gold">
               <Youtube size={20} />
             </a>
           </div>

@@ -16,7 +16,7 @@ export default function MusicSection() {
           eyebrow="Sound &amp; Soul"
           title="Music by Cliff Perkins"
           dark
-          subtitle="Albums rooted in gospel, blues, and soul — songs written from the heart."
+          subtitle="Albums rooted in R&B and soul — songs written from the heart."
         />
         <ProductGrid products={albums} loading={loading} error={error} onRetry={retry} />
         <div className="flex justify-center mt-12">

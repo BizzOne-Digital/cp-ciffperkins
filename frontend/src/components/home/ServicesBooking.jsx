@@ -7,11 +7,11 @@ import useApiData from '../../hooks/useApiData'
 import getIcon from '../../utils/iconMap'
 
 const FALLBACK_SERVICES = [
-  { title: 'Author & Storyteller', icon: 'BookOpen' },
-  { title: 'Recording Artist', icon: 'Disc3' },
-  { title: 'Motivational Speaker', icon: 'Mic2' },
-  { title: 'Live Performances', icon: 'Music' },
-  { title: 'Music & Book Sales', icon: 'ShoppingBag' },
+  { title: 'R&B Tenor Vocalist', icon: 'mic' },
+  { title: 'Choreographer', icon: 'workshop' },
+  { title: 'Author & Storyteller', icon: 'book' },
+  { title: 'Booking Agent & Manager', icon: 'booking' },
+  { title: 'Live Performances', icon: 'concert' },
 ]
 
 const EVENT_TYPES = [

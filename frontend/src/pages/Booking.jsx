@@ -24,6 +24,19 @@ export default function Booking() {
       <section className="bg-ivory section-py">
         <div className="container-px mx-auto max-w-3xl">
           <BookingForm />
+
+          <div className="mt-14 border-t border-gold/20 pt-10 text-center">
+            <span className="block text-softgold text-xs font-semibold tracking-[0.25em] uppercase mb-2">
+              Booking Contact
+            </span>
+            <p className="text-lg font-heading font-semibold text-espresso mb-1">Cliff Perkins</p>
+            <p className="text-sm text-charcoal/60 mb-3">ITP Management (In The Pocket Management)</p>
+            <p className="text-sm text-charcoal/70">
+              <a href="mailto:soulg192@aol.com" className="hover:text-gold">soulg192@aol.com</a>
+              <span className="mx-2 text-charcoal/30">·</span>
+              <a href="tel:2019201021" className="hover:text-gold">201-920-1021</a>
+            </p>
+          </div>
         </div>
       </section>
     </>

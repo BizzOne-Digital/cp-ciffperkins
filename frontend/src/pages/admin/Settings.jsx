@@ -7,12 +7,22 @@ import Loader from '../../components/common/Loader'
 import ErrorState from '../../components/common/ErrorState'
 
 const FIELDS = [
-  ['contactEmail', 'Contact Email'],
-  ['contactPhone', 'Contact Phone'],
-  ['address', 'Address'],
-  ['facebookUrl', 'Facebook URL'],
-  ['instagramUrl', 'Instagram URL'],
-  ['youtubeUrl', 'YouTube URL'],
+  ['businessName', 'Business Name'],
+  ['email', 'Contact Email'],
+  ['phone', 'Contact Phone'],
+  ['amazonStoreUrl', 'Amazon Store URL'],
+  ['cdBabyUrl', 'CD Baby URL'],
+  ['websiteUrl', 'Website URL'],
+  ['facebook', 'Facebook URL'],
+  ['instagram', 'Instagram URL'],
+  ['youtube', 'YouTube URL'],
+  ['spotify', 'Spotify URL'],
+]
+
+const SEO_FIELDS = [
+  ['siteTitle', 'Site Title'],
+  ['metaDescription', 'Meta Description'],
+  ['keywords', 'Keywords'],
 ]
 
 export default function Settings() {
@@ -69,6 +79,24 @@ export default function Settings() {
               <input id={key} value={form[key] || ''} onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))} className={inputClass} />
             </div>
           ))}
+
+          <div className="pt-4 border-t border-gold/20">
+            <span className="block text-xs font-semibold uppercase tracking-wide text-warmbrown mb-4">SEO</span>
+            <div className="space-y-5">
+              {SEO_FIELDS.map(([key, label]) => (
+                <div key={key}>
+                  <label htmlFor={`seo-${key}`} className={labelClass}>{label}</label>
+                  <input
+                    id={`seo-${key}`}
+                    value={form.seo?.[key] || ''}
+                    onChange={(e) => setForm((f) => ({ ...f, seo: { ...f.seo, [key]: e.target.value } }))}
+                    className={inputClass}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
           <button
             type="submit"
             disabled={saving}

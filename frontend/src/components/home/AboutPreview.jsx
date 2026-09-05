@@ -8,7 +8,7 @@ import { api } from '../../utils/api'
 
 const FALLBACK = {
   body:
-    'Cliff Perkins has spent a lifetime turning hard-won wisdom into words and melodies that heal. Raised on gospel harmonies and hometown grit, he built a career that spans the page and the stage — a rare voice that speaks equally through story and song. Today, Cliff continues to write, record, and perform, carrying a message of resilience, faith, and legacy to every audience he meets.',
+    "Cliff Perkins is an R&B tenor singer, choreographer, and the founder and organizer of Soul Generation — where he has also served as business manager, record company owner, publisher, and booking agent for the group. Today, Cliff continues to write, record, and perform, carrying decades of soul and R&B experience to every audience he meets.",
 }
 
 export default function AboutPreview() {

@@ -24,6 +24,7 @@ const updateSettings = async (req, res, next) => {
       'phone',
       'amazonStoreUrl',
       'cdBabyUrl',
+      'websiteUrl',
       'facebook',
       'instagram',
       'youtube',
