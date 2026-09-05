@@ -15,6 +15,25 @@ const PHILOSOPHY =
 const LEGACY =
   "More than record sales or book deals, Cliff measures his career by the rooms he's changed and the people who've felt less alone because of a lyric or a page. He's spent recent years investing in mentorship — helping younger authors and musicians find their own voice rather than imitate his. The goal isn't to be remembered as a name, but to leave behind a body of work that keeps doing its job long after he's off the stage."
 
+const CAREER_HIGHLIGHTS = [
+  {
+    title: 'Companies',
+    items: ['Paper Cup Productions (production company)', 'IIClass Record Company (record label)'],
+  },
+  {
+    title: 'Collaborations',
+    items: ['The New Moments', 'Ray Goodman & Brown', 'Blue Magic', "Tomorrow's Edition", 'Main Ingredient'],
+  },
+  {
+    title: 'Commercials',
+    items: ['Burger King', 'Miller Beer', 'Sassoon', 'True Cigarettes', 'Sasson Jeans'],
+  },
+  {
+    title: 'Radio & TV',
+    items: ['WBLS Radio', 'KISS FM Radio', 'Ebony Affair (TV)', 'Soul Train', 'Merv Griffin Telethon', 'Joey Bishop'],
+  },
+]
+
 export default function About() {
   useDocumentMeta('About', "The life and legacy of Cliff Perkins — author, musician, and speaker.")
   const [about, setAbout] = useState(FALLBACK_ABOUT)
@@ -60,6 +79,26 @@ export default function About() {
       </section>
 
       <section className="bg-cream section-py">
+        <div className="container-px mx-auto max-w-6xl">
+          <SectionTitle eyebrow="Career Highlights" title="Decades in the Business" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-12">
+            {CAREER_HIGHLIGHTS.map((group) => (
+              <div key={group.title}>
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-warmbrown mb-4">
+                  {group.title}
+                </h3>
+                <ul className="space-y-2">
+                  {group.items.map((item) => (
+                    <li key={item} className="text-sm text-charcoal/70">{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-ivory section-py">
         <div className="container-px mx-auto max-w-3xl text-center">
           <SectionTitle eyebrow="Personal Philosophy" title="Truth Over Performance" />
           <p className="text-charcoal/70 text-base md:text-lg leading-relaxed">{PHILOSOPHY}</p>

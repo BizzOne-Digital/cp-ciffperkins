@@ -43,7 +43,7 @@ const products = [
     shortDescription: 'A Little League story about teamwork, focus, and belief.',
     description:
       'Teamwork. Focus. Listen. Practice. Believe. Batter Up! is a heartfelt Little League story for young readers about showing up and giving your best.',
-    price: 25,
+    price: 12,
     amazonUrl: 'https://www.amazon.com',
     featured: true,
     active: true,
@@ -54,11 +54,9 @@ const products = [
     slug: 'beyond-body-and-soul',
     type: 'cd',
     category: 'R&B / Soul',
-    shortDescription: "Soul Generation's debut album.",
+    shortDescription: "Soul Generation's debut album, released in 1973.",
     description:
-      "The first album from Soul Generation featuring Cliff Perkins — the record that carries the group's earliest hits.",
-    price: 12,
-    cdBabyUrl: 'https://www.cdbaby.com',
+      "Soul Generation's first album, released in 1973 — the record that carries the group's earliest hits. Not currently for sale.",
     featured: true,
     active: true,
     displayOrder: 4,
@@ -76,6 +74,20 @@ const products = [
     featured: true,
     active: true,
     displayOrder: 5,
+  },
+  {
+    name: 'Jealous Friends',
+    slug: 'jealous-friends',
+    type: 'book',
+    category: 'Fiction',
+    shortDescription: 'A story about envy, loyalty, and the friends who test both.',
+    description:
+      "Jealous Friends continues the mix once and only twice — a story about the friendships that test loyalty when jealousy creeps in.",
+    price: 25,
+    amazonUrl: 'https://www.amazon.com',
+    featured: false,
+    active: true,
+    displayOrder: 6,
   },
 ];
 

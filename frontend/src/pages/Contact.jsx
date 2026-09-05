@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { Mail, Phone, Send, CheckCircle2 } from 'lucide-react'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 import { api, getErrorMessage } from '../utils/api'
 
 const initialState = { name: '', email: '', subject: '', message: '' }
+
+const FALLBACK_SETTINGS = { email: 'soulg192@aol.com', phone: '201-920-1021' }
 
 export default function Contact() {
   useDocumentMeta('Contact', 'Get in touch with the Cliff Perkins team.')
@@ -11,6 +13,21 @@ export default function Contact() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
+  const [settings, setSettings] = useState(FALLBACK_SETTINGS)
+
+  useEffect(() => {
+    let mounted = true
+    api
+      .get('/settings')
+      .then((res) => {
+        const data = res.data?.data
+        if (mounted && data) setSettings({ ...FALLBACK_SETTINGS, ...data })
+      })
+      .catch(() => {})
+    return () => {
+      mounted = false
+    }
+  }, [])
 
   const handleChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
 
@@ -50,22 +67,24 @@ export default function Contact() {
               <Mail size={22} className="text-gold shrink-0 mt-0.5" aria-hidden="true" />
               <div>
                 <h3 className="font-semibold text-espresso mb-1">Email</h3>
-                <p className="text-sm text-charcoal/70">booking@cliffperkins.com</p>
+                <a href={`mailto:${settings.email}`} className="text-sm text-charcoal/70 hover:text-gold">
+                  {settings.email}
+                </a>
               </div>
             </div>
             <div className="flex gap-4">
               <Phone size={22} className="text-gold shrink-0 mt-0.5" aria-hidden="true" />
               <div>
                 <h3 className="font-semibold text-espresso mb-1">Phone</h3>
-                <p className="text-sm text-charcoal/70">(555) 010-2024</p>
+                <a href={`tel:${settings.phone.replace(/[^0-9+]/g, '')}`} className="text-sm text-charcoal/70 hover:text-gold">
+                  {settings.phone}
+                </a>
               </div>
             </div>
-            <div className="flex gap-4">
-              <MapPin size={22} className="text-gold shrink-0 mt-0.5" aria-hidden="true" />
-              <div>
-                <h3 className="font-semibold text-espresso mb-1">Based In</h3>
-                <p className="text-sm text-charcoal/70">Nashville, Tennessee</p>
-              </div>
+            <div>
+              <h3 className="font-semibold text-espresso mb-1">Management</h3>
+              <p className="text-sm text-charcoal/70">Cliff Perkins</p>
+              <p className="text-sm text-charcoal/70">ITP Management</p>
             </div>
           </div>
 
