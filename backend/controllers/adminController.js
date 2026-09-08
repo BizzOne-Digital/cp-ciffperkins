@@ -3,6 +3,7 @@ const Booking = require('../models/Booking');
 const User = require('../models/User');
 const Contact = require('../models/Contact');
 const Gallery = require('../models/Gallery');
+const EmailLog = require('../models/EmailLog');
 
 // @desc  Get dashboard stats (admin)
 // @route GET /api/admin/stats
@@ -136,4 +137,25 @@ const getCustomers = async (req, res, next) => {
   }
 };
 
-module.exports = { getDashboardStats, getRecentBookings, getRecentMessages, getDashboard, getCustomers };
+// @desc  List email send logs (admin)
+// @route GET /api/admin/email-logs
+const getEmailLogs = async (req, res, next) => {
+  try {
+    const { status } = req.query;
+    const filter = {};
+    if (status) filter.status = status;
+    const logs = await EmailLog.find(filter).sort({ createdAt: -1 }).limit(200);
+    res.json({ success: true, data: logs });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  getDashboardStats,
+  getRecentBookings,
+  getRecentMessages,
+  getDashboard,
+  getCustomers,
+  getEmailLogs,
+};

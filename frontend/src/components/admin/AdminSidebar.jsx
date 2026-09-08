@@ -10,6 +10,7 @@ import {
   Star,
   FileText,
   Mail,
+  MailCheck,
   Settings,
   UserCircle,
   LogOut,
@@ -27,6 +28,7 @@ const NAV = [
   { to: '/admin/testimonials', label: 'Testimonials', icon: Star },
   { to: '/admin/content', label: 'Website Content', icon: FileText },
   { to: '/admin/messages', label: 'Contact Messages', icon: Mail },
+  { to: '/admin/email-logs', label: 'Email Logs', icon: MailCheck },
   { to: '/admin/settings', label: 'Settings', icon: Settings },
   { to: '/admin/profile', label: 'Profile', icon: UserCircle },
 ]

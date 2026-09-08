@@ -1,5 +1,16 @@
 const nodemailer = require('nodemailer');
 
+// Lazily required to avoid a require-cycle at module load time.
+const logEmail = async (entry) => {
+  try {
+    const EmailLog = require('../models/EmailLog');
+    await EmailLog.create(entry);
+  } catch (err) {
+    // Never let logging itself break email sending.
+    console.error('EmailLog write failed:', err.message);
+  }
+};
+
 let transporter;
 
 const getTransporter = () => {
@@ -38,6 +49,7 @@ const sendMail = async ({ to, subject, html }) => {
     console.log('To:', to);
     console.log('Subject:', subject);
     console.log('----------------------------');
+    await logEmail({ to, subject, status: 'skipped', error: 'Email not configured' });
     return { fallback: true };
   }
 
@@ -48,9 +60,12 @@ const sendMail = async ({ to, subject, html }) => {
       subject,
       html,
     });
+    console.log(`Email sent -> ${to} | "${subject}" | id: ${info.messageId}`);
+    await logEmail({ to, subject, status: 'sent', messageId: info.messageId || '' });
     return info;
   } catch (error) {
-    console.error('sendMail error:', error.message);
+    console.error(`Email FAILED -> ${to} | "${subject}" | ${error.message}`);
+    await logEmail({ to, subject, status: 'failed', error: error.message });
     throw error;
   }
 };

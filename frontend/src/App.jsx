@@ -35,6 +35,7 @@ import AdminGallery from './pages/admin/Gallery'
 import AdminTestimonials from './pages/admin/Testimonials'
 import AdminWebsiteContent from './pages/admin/WebsiteContent'
 import AdminContactMessages from './pages/admin/ContactMessages'
+import AdminEmailLogs from './pages/admin/EmailLogs'
 import AdminSettings from './pages/admin/Settings'
 import AdminProfile from './pages/admin/AdminProfile'
 
@@ -92,6 +93,7 @@ export default function App() {
         <Route path="testimonials" element={<AdminTestimonials />} />
         <Route path="content" element={<AdminWebsiteContent />} />
         <Route path="messages" element={<AdminContactMessages />} />
+        <Route path="email-logs" element={<AdminEmailLogs />} />
         <Route path="settings" element={<AdminSettings />} />
         <Route path="profile" element={<AdminProfile />} />
       </Route>
