@@ -37,19 +37,28 @@ const createBooking = async (req, res, next) => {
       user: req.user ? req.user._id : undefined,
     });
 
-    sendEmail({
-      to: booking.email,
-      subject: 'Booking Request Received',
-      html: bookingConfirmationCustomer(booking),
-    }).catch((err) => console.error('booking confirmation email failed:', err.message));
+    // Awaited (not fire-and-forget): on serverless platforms the function
+    // execution can be frozen the instant the response is sent, which would
+    // otherwise kill these sends and their log writes mid-flight.
+    const emailTasks = [
+      sendEmail({
+        to: booking.email,
+        subject: 'Booking Request Received',
+        html: bookingConfirmationCustomer(booking),
+      }).catch((err) => console.error('booking confirmation email failed:', err.message)),
+    ];
 
     if (process.env.ADMIN_EMAIL) {
-      sendEmail({
-        to: process.env.ADMIN_EMAIL,
-        subject: 'New Booking Request',
-        html: bookingNotificationAdmin(booking),
-      }).catch((err) => console.error('booking admin notification failed:', err.message));
+      emailTasks.push(
+        sendEmail({
+          to: process.env.ADMIN_EMAIL,
+          subject: 'New Booking Request',
+          html: bookingNotificationAdmin(booking),
+        }).catch((err) => console.error('booking admin notification failed:', err.message))
+      );
     }
+
+    await Promise.allSettled(emailTasks);
 
     res.status(201).json({ success: true, data: booking });
   } catch (error) {
@@ -128,7 +137,7 @@ const updateBookingStatus = async (req, res, next) => {
     booking.status = status;
     await booking.save();
 
-    sendEmail({
+    await sendEmail({
       to: booking.email,
       subject: 'Booking Status Update',
       html: bookingStatusUpdate(booking),

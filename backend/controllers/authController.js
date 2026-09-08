@@ -23,7 +23,7 @@ const registerUser = async (req, res, next) => {
 
     const user = await User.create({ name, email, password, phone });
 
-    sendEmail({
+    await sendEmail({
       to: user.email,
       subject: 'Welcome to Cliff Perkins',
       html: welcomeCustomer({ name: user.name }),

@@ -13,19 +13,28 @@ const createContact = async (req, res, next) => {
 
     const contact = await Contact.create({ name, email, phone, subject, message });
 
-    if (process.env.ADMIN_EMAIL) {
+    // Awaited (not fire-and-forget): on serverless platforms the function
+    // execution can be frozen the instant the response is sent, which would
+    // otherwise kill these sends and their log writes mid-flight.
+    const emailTasks = [
       sendEmail({
-        to: process.env.ADMIN_EMAIL,
-        subject: `New Contact Message: ${subject || 'General Inquiry'}`,
-        html: `<p><strong>From:</strong> ${name} (${email})</p><p><strong>Phone:</strong> ${phone || '-'}</p><p>${message}</p>`,
-      }).catch((err) => console.error('contact admin email failed:', err.message));
+        to: email,
+        subject: 'We received your message',
+        html: contactReceived({ name }),
+      }).catch((err) => console.error('contact ack email failed:', err.message)),
+    ];
+
+    if (process.env.ADMIN_EMAIL) {
+      emailTasks.push(
+        sendEmail({
+          to: process.env.ADMIN_EMAIL,
+          subject: `New Contact Message: ${subject || 'General Inquiry'}`,
+          html: `<p><strong>From:</strong> ${name} (${email})</p><p><strong>Phone:</strong> ${phone || '-'}</p><p>${message}</p>`,
+        }).catch((err) => console.error('contact admin email failed:', err.message))
+      );
     }
 
-    sendEmail({
-      to: email,
-      subject: 'We received your message',
-      html: contactReceived({ name }),
-    }).catch((err) => console.error('contact ack email failed:', err.message));
+    await Promise.allSettled(emailTasks);
 
     res.status(201).json({ success: true, data: contact });
   } catch (error) {
